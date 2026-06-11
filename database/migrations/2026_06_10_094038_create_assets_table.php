@@ -23,7 +23,7 @@ return new class extends Migration
 
             $table->string('asset_code')->unique();
 
-            $table->string('asset_name');
+            $table->string('asset_name')->index();
 
             $table->string('serial_number')->nullable()->unique();
 
@@ -35,7 +35,7 @@ return new class extends Migration
 
             $table->decimal('current_value', 15, 2)->nullable();
 
-            $table->date('purchase_date')->nullable();
+            $table->date('purchase_date')->nullable()->index();
 
             $table->date('warranty_expiry')->nullable();
 
@@ -57,20 +57,6 @@ return new class extends Migration
             ])->default('available');
 
             $table->text('description')->nullable();
-
-            $table->index('asset_type_id');
-
-            $table->index('asset_status');
-
-            $table->index('asset_condition');
-
-            $table->index('purchase_date');
-
-            $table->index('asset_name');
-
-            // $table->index('vendor_id');
-
-            // $table->index('branch_id');
 
             $table->timestamps();
 

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\BaseModel;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -32,10 +31,8 @@ class Asset extends BaseModel
     protected function casts(): array
     {
         return [
-            'purchase_cost' => 'decimal:2',
-            'current_value' => 'decimal:2',
-            'purchase_date' => 'date',
-            'warranty_expiry' => 'date',
+            'barcode' => 'integer',
+            'qr_code' => 'integer',
         ];
     }
     protected static function boot()
@@ -70,4 +67,5 @@ class Asset extends BaseModel
     {
         return $this->hasMany(AssetDisposal::class);
     }
+
 } 
