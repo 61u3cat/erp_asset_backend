@@ -11,31 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('asset_maintenance', function (Blueprint $table) {
+        Schema::create('warehouse_racks', function (Blueprint $table) {
 
             $table->id();
 
             $table->uuid('uuid')->unique();
 
-            $table->foreignId('asset_id')
+            $table->foreignId('warehouse_id')
                 ->constrained()
                 ->cascadeOnDelete();
 
-            $table->string('maintenance_type');
+            $table->string('rack_code')->index();
 
-            $table->decimal('maintenance_cost', 15, 2);
-
-            $table->date('maintenance_date');
-
-            $table->date('next_maintenance_date')->nullable();
-
-            $table->text('remarks')->nullable();
-
-            $table->index('asset_id');
-
-            $table->index('maintenance_date');
-
-            $table->index('next_maintenance_date');
+            $table->boolean('status')->default(true);
 
             $table->timestamps();
 
@@ -48,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('asset_maintenance');
+        Schema::dropIfExists('warehouse_racks');
     }
 };

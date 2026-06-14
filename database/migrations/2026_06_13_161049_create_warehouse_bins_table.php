@@ -11,27 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('depreciation_ledger', function (Blueprint $table) {
+        Schema::create('warehouse_bins', function (Blueprint $table) {
 
             $table->id();
 
             $table->uuid('uuid')->unique();
 
-            $table->foreignId('asset_id')
-                ->constrained()
+            $table->foreignId('rack_id')
+                ->constrained('warehouse_racks')
                 ->cascadeOnDelete();
 
-            $table->decimal('depreciation_amount', 15, 2);
+            $table->string('bin_code')->index();
 
-            $table->decimal('book_value', 15, 2);
-
-            $table->index('asset_id');
-
-            $table->index('depreciation_date');
-
-            $table->date('depreciation_date');
+            $table->boolean('status')->default(true);
 
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 
@@ -40,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('depreciation_ledger');
+        Schema::dropIfExists('warehouse_bins');
     }
 };

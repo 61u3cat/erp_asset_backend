@@ -11,21 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('asset_categories', function (Blueprint $table) {
-
+        Schema::create('asset_attribute_definitions', function (Blueprint $table) {
             $table->id();
-
-            $table->uuid('uuid')->unique();
-
-            $table->string('category_name');
-
-            $table->text('description')->nullable();
-
-            $table->index('category_name');
-
             $table->timestamps();
-
-            $table->softDeletes();
         });
     }
 
@@ -34,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('asset_categories');
+        Schema::dropIfExists('asset_attribute_definitions');
     }
 };

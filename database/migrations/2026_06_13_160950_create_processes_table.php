@@ -11,25 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('asset_disposals', function (Blueprint $table) {
+        Schema::create('processes', function (Blueprint $table) {
 
             $table->id();
 
             $table->uuid('uuid')->unique();
 
-            $table->foreignId('asset_id')
-                ->constrained()
-                ->cascadeOnDelete();
+            $table->string('process_name')->index();
 
-            $table->text('disposal_reason');
+            $table->text('description')->nullable();
 
-            $table->decimal('disposal_amount', 15, 2)->nullable();
-
-            $table->timestamp('disposed_at');
-
-            $table->index('asset_id');
-
-            $table->index('disposed_at');
+            $table->boolean('status')->default(true);
 
             $table->timestamps();
 
@@ -42,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('asset_disposals');
+        Schema::dropIfExists('processes');
     }
 };

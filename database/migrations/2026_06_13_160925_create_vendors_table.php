@@ -11,23 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('asset_types', function (Blueprint $table) {
+        Schema::create('vendors', function (Blueprint $table) {
 
             $table->id();
 
             $table->uuid('uuid')->unique();
 
-            $table->foreignId('category_id')
-                ->constrained('asset_categories')
-                ->cascadeOnDelete();
+            $table->string('vendor_code')->unique();
 
-            $table->string('type_name');
+            $table->string('vendor_name')->index();
 
-            $table->text('description')->nullable();
+            $table->string('email')->nullable();
 
-            $table->index('category_id');
+            $table->string('phone')->nullable();
 
-            $table->index('type_name');
+            $table->text('address')->nullable();
+
+            $table->boolean('status')->default(true);
 
             $table->timestamps();
 
@@ -40,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('asset_types');
+        Schema::dropIfExists('vendors');
     }
 };
